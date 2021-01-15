@@ -19,7 +19,7 @@ class MultiClassKerasClassifier(Model):
         #                                           include_top=False,
         #                                           weights='imagenet')
         self.xception_base = tf.keras.applications.Xception(weights='imagenet',  # Load weights pre-trained on ImageNet.
-                                                         input_shape=(150, 150, 3),
+                                                            input_shape=(150, 150, 3),
                                                             include_top=False)
         self.xception_base.trainable = False
         # self.resnet_base = False
@@ -33,22 +33,25 @@ class MultiClassKerasClassifier(Model):
         # self.resnet_preprocessor = tf.keras.applications.resnet50.preprocess_input
 
     def call(self, inputs, **kwargs):
+        # x = self.resnet_preprocessor(inputs)
+        x = self.xception_base(inputs, training=False)
+        x = self.flatten(x)
+        x = self.dense01(x)
+        x = self.dense02(x)
+        x = self.dense1(x)
+        x = self.dense2(x)
+        return self.output3(x)
 
-            # x = self.resnet_preprocessor(inputs)
-            x = self.xception_base(inputs, training=False)
-            x = self.flatten(x)
-            x = self.dense01(x)
-            x = self.dense02(x)
-            x = self.dense1(x)
-            x = self.dense2(x)
-            return self.output3(x)
 
 
 if __name__ == '__main__':
+    """
+    USAGE OF MultiClassKerasClassifier
+    """
     model = MultiClassKerasClassifier()
     model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.001),
-             loss= tf.keras.losses.CategoricalCrossentropy(),
-             metrics = ['accuracy'])
+                  loss=tf.keras.losses.CategoricalCrossentropy(),
+                  metrics=['accuracy'])
     gc = GenCreator('/home/iamtheuserofthis/python_workspace/img_processing/jpeg_images_set',
                     batch_size=32,
                     target_size=150)
@@ -59,14 +62,7 @@ if __name__ == '__main__':
     model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.001),
                   loss=tf.keras.losses.CategoricalCrossentropy(),
                   metrics=['accuracy'], run_eagerly=True)
-    # print(tf.executing_eagerly())
-    # model.fit_generator(
-    #     train_generator,
-    #     epochs=2,
-    #     steps_per_epoch=len(train_generator),  # len(train_generator),
-    #     validation_data=validation_generator,
-    #     validation_steps=len(validation_generator),  # len(validation_generator),
-    # )
-    model.build(input_shape=(16,150,150,3))
- 
+
+    model.build(input_shape=(16, 150, 150, 3))
+
     model.summary()
