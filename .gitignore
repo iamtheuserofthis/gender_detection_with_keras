@@ -1,0 +1,24 @@
+### Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+ENV/
+.idea/
+
+#models generated
+models/
+
+# project specific
+label_gender_image_from_db.py
+copy_image_with_1_face.py
