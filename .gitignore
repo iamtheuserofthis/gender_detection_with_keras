@@ -22,3 +22,5 @@ models/
 # project specific
 label_gender_image_from_db.py
 copy_image_with_1_face.py
+logs/
+outfiles/
