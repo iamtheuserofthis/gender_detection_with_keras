@@ -13,10 +13,8 @@ H X W X D tensor, GAP will average the H X W features into a single number and r
 |------|---|
 |Xception Model (Feature Extraction)|71|
 |GlobalAveragePooling2D|1|
-|Dense 512 RELU units|1|
-|Dense 512 RELU units|1|
-|Dense 256 RELU units|1|
-|Dense 256 RELU units|1|
+|Dense 512 RELU units|2|
+|Dense 256 RELU units|2|
 |Dense n_classes UNITS Softmax Activation|1|
 
 
@@ -29,20 +27,21 @@ xception (Model)             (None, 5, 5, 2048)        20861480
 _________________________________________________________________
 global_average_pooling2d_1 ( multiple                  0         
 _________________________________________________________________
-dense_5 (Dense)              multiple                  1049088   
+DENSE-512-RELU-1 (Dense)     multiple                  1049088   
 _________________________________________________________________
-dense_6 (Dense)              multiple                  262656    
+DENSE-512-RELU-2 (Dense)     multiple                  262656    
 _________________________________________________________________
-dense_7 (Dense)              multiple                  131328    
+DENSE-256-RELU-1 (Dense)     multiple                  131328    
 _________________________________________________________________
-dense_8 (Dense)              multiple                  65792     
+DENSE-256-RELU-2 (Dense)     multiple                  65792     
 _________________________________________________________________
-dense_9 (Dense)              multiple                  771       
+SOFTMAX-3 (Dense)            multiple                  771       
 =================================================================
 Total params: 22,371,115
 Trainable params: 1,509,635
 Non-trainable params: 20,861,480
 _________________________________________________________________
+
 ```
 
 

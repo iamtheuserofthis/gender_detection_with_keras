@@ -25,14 +25,16 @@ class MultiClassKerasClassifier(Model):
         # self.resnet_base = False
         self.flatten = tf.keras.layers.GlobalAvgPool2D()
         # self.flatten = tf.keras.layers.Flatten()
-        self.dense01 = Dense(512, activation='relu')
-        self.dense02 = Dense(512, activation='relu')
-        self.dense1 = Dense(256, activation='relu')
-        self.dense2 = Dense(256, activation='relu')
-        self.output3 = Dense(3, activation='softmax')
+        self.dense01 = Dense(512, activation='relu', name="DENSE-512-RELU-1")
+        self.dense02 = Dense(512, activation='relu', name="DENSE-512-RELU-2")
+        self.dense1 = Dense(256, activation='relu', name="DENSE-256-RELU-1")
+        self.dense2 = Dense(256, activation='relu', name="DENSE-256-RELU-2")
+        self.output3 = Dense(3, activation='softmax', name="SOFTMAX-3")
         # self.resnet_preprocessor = tf.keras.applications.resnet50.preprocess_input
 
+
     def call(self, inputs, **kwargs):
+
         # x = self.resnet_preprocessor(inputs)
         x = self.xception_base(inputs, training=False)
         x = self.flatten(x)
@@ -40,7 +42,9 @@ class MultiClassKerasClassifier(Model):
         x = self.dense02(x)
         x = self.dense1(x)
         x = self.dense2(x)
-        return self.output3(x)
+        outputs = self.output3(x)
+        tf.summary.histogram('outputs', outputs)
+        return outputs
 
 
 

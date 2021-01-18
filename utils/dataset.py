@@ -9,12 +9,15 @@ Before using this script the datasets must be created in the following manner:
             /Root
                 |-----|Train/--------|female/
                 |     |              |male/
+                |     |              |others/
                 |     |
                 |-----|Test/---------|female/
                 |     |              |male/
+                |     |              |others/
                 |     |
                 |-----|Validation/---|female/
                                      |male/
+                                     |others/
 
 '''
 
@@ -37,16 +40,13 @@ class GenCreator:
         train_generator = self.train_datagen.flow_from_directory(
             self.train_dir,
             target_size=(self.target_size, self.target_size),
-            batch_size=self.batch_size,
-        # class_mode='binary'
+            batch_size=self.batch_size
         )
         validation_generator = self.test_datagen.flow_from_directory(self.validation_dir,
-                                                                     target_size=(self.target_size, self.target_size),
-                                                                     # class_mode='binary'
+                                                                     target_size=(self.target_size, self.target_size)
                                                                      )
         test_generator = self.test_datagen.flow_from_directory(self.test_dir,
-                                                               target_size=(self.target_size, self.target_size),
-                                                               # class_mode='binary'
+                                                               target_size=(self.target_size, self.target_size)
                                                                )
         if sets == 2:
             return train_generator, validation_generator
