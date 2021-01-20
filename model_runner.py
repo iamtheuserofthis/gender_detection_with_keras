@@ -1,15 +1,10 @@
 import tensorflow as tf
-from datetime import datetime
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-import tensorflow.keras as keras
+import os
 import sys
 sys.path.append('./utils')
 from create_model import MultiClassKerasClassifier
 from dataset import GenCreator
-import matplotlib.pyplot as plt
-import numpy
-import tensorflow.keras.models
-import os
+
 
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir="./logs", update_freq=10)
 
@@ -45,34 +40,6 @@ if __name__ == '__main__':
     )
 
     model.save('models/gend_detectx')
-    #
-    #
-    #
-    #
-    # model_s = tf.keras.models.load_model('/home/iamtheuserofthis/python_workspace/mod1')
-
-    model = tf.keras.models.load_model('./models/gend_detect2')
-    img_samp, lab_samp = next(validation_generator)
-    res = []
-    pred_labs = model(img_samp)
-    print(img_samp.shape)
-    #print(pred_labs)
-    print(lab_samp)
-
-    # plt.plot(history.history['acc'])
-    # plt.plot(history.history['val_acc'])
-    # plt.title('model accuracy')
-    # plt.ylabel('accuracy')
-    # plt.xlabel('epoch')
-    # plt.legend(['train', 'val'], loc='upper left')
-    # plt.show()
-
-    # imgs , labels = next(train_generator)
-
-    # for i in range(4):
-    #     plt.imshow(imgs[i])
-    #     plt.title(labels[i])
-    #     plt.show()
 
 
 
